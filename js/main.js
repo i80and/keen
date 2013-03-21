@@ -37,21 +37,21 @@ $(function() {
         }
         
         return padding.join('') + str;
-    }
+    };
 
     var timeFormat = function(seconds) {
         var minutes = (seconds / 60.0)|0;
         var seconds = (seconds - (minutes * 60))|0;
         return minutes.toString() + ':' + lfill('0', 2, seconds.toString());
-    }
+    };
 
     var PositionStack = function() {
         this.marks = [];
-    }
+    };
 
     PositionStack.prototype.isEmpty = function() {
         return this.marks.length === 0;
-    }
+    };
 
     PositionStack.prototype.getPosition = function() {
         if(this.marks.length === 0) {
@@ -59,28 +59,28 @@ $(function() {
         }
 
         return this.marks[this.marks.length - 1];
-    }
+    };
     
     PositionStack.prototype.pushPosition = function(pos) {
         this.marks.push(pos);
-    }
+    };
     
     PositionStack.prototype.popPosition = function() {
         // Handle the empty list case
-        if(this.marks.length == 0) {
+        if(this.marks.length === 0) {
             return 0;
         }
 
         return this.marks.pop();
-    }
+    };
 
     PositionStack.prototype.exportPositions = function() {
         return JSON.stringify(this.marks);
-    }
+    };
     
     PositionStack.prototype.importPositions = function(x) {
         this.marks = JSON.parse(x);
-    }
+    };
     
     var SEGMENT_LENGTH = 6.0;
     var Player = function(element) {
@@ -102,7 +102,7 @@ $(function() {
         // When changing the current mark position, we typically want to take
         // some action elsewhere, like saving the current mark stack.
         this.onNext = function() {};
-        this.onBack = function() {}
+        this.onBack = function() {};
 
         // Regularly update our time string (x:xx)
         this.sourceElement.addEventListener('timeupdate', function() {
@@ -137,31 +137,29 @@ $(function() {
         console.log(path);
         this.sourceElement.src = path;
         this.sourceElement.load();
-    }
+    };
 
     Player.prototype.remainingSegmentTime = function() {
-        if(this.playbackTimerId == 0) {
+        if(this.playbackTimerId === 0) {
             return 0;
         }
         
         return (this.marks.getPosition() + SEGMENT_LENGTH) - this.sourceElement.currentTime;
-    }
+    };
     
     Player.prototype.play = function() {
-        var self = this;
-
         // Keeps multiple playback timers from rolling concurrently,
         // which would make mashed potatoes out of the position stack
         this.stop();
 
-        self.sourceElement.currentTime = this.marks.getPosition();
-        self.sourceElement.play();
-        self.sourceElement.playbackRate = self.speed;
+        this.sourceElement.currentTime = this.marks.getPosition();
+        this.sourceElement.play();
+        this.sourceElement.playbackRate = this.speed;
         
         this.playbackTimerId = window.setTimeout(function() {
-            self.sourceElement.pause();
-        }, SEGMENT_LENGTH * 1000 * (1/self.speed));
-    }
+            this.sourceElement.pause();
+        }.bind(this), SEGMENT_LENGTH * 1000 * (1/this.speed));
+    };
     
     Player.prototype.stop = function() {
         if(this.playbackTimerId > 0) {
@@ -169,7 +167,7 @@ $(function() {
             this.playbackTimerId = 0;
             this.sourceElement.pause();
         }
-    }
+    };
     
     Player.prototype.back = function() {
         if(this.marks.getPosition() <= 0.0) {
@@ -178,7 +176,7 @@ $(function() {
 
         this.marks.popPosition();
         this.onBack();
-    }
+    };
     
     Player.prototype.next = function() {
         // If we're just starting out, start from 0
@@ -190,7 +188,7 @@ $(function() {
         }
         
         this.onNext();
-    }
+    };
 
     var Editor = function(id, name, player) {
         this.name = name;
@@ -203,8 +201,8 @@ $(function() {
         this.load(this.name);
 
         // Overridable callbacks
-        this.onDirty = function() {}
-        this.onSave = function() {}
+        this.onDirty = function() {};
+        this.onSave = function() {};
 
         // We want to save whenever the document is left untouched for
         // more than saveInterval seconds.
@@ -268,28 +266,28 @@ $(function() {
         if(this.player.sourceElement.src) {
             this.player.sourceElement.currentTime = this.player.marks.getPosition();
         }
-    }
+    };
     
     var player = new Player(document.getElementById('player'));
     document.addEventListener('keydown', function(event) {
-        if(event.altKey && event.keyCode == 'L'.charCodeAt(0)) {
+        if(event.altKey && event.keyCode === 'L'.charCodeAt(0)) {
             player.next();
             player.play();
         }
     });
     document.addEventListener('keydown', function(event) {
-        if(event.altKey && event.keyCode == 'K'.charCodeAt(0)) {
+        if(event.altKey && event.keyCode === 'K'.charCodeAt(0)) {
             player.play();
         }
     });
     document.addEventListener('keydown', function(event) {
-        if(event.altKey && event.keyCode == 'J'.charCodeAt(0)) {
+        if(event.altKey && event.keyCode === 'J'.charCodeAt(0)) {
             player.back();
             player.play();
         }
     });
     document.addEventListener('keydown', function(event) {
-        if(event.altKey && event.keyCode == 'S'.charCodeAt(0)) {
+        if(event.altKey && event.keyCode === 'S'.charCodeAt(0)) {
             editor.save(editor.name);
         }
     });
@@ -304,7 +302,7 @@ $(function() {
         $('#saveStatus').animate({
             opacity: 0.0
         }, 'fast');
-    }
+    };
     
     var objectURL = null;
     $('#fileInput')[0].onchange = function(event) {
