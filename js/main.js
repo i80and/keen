@@ -46,10 +46,18 @@ $(function() {
     }
 
     var PositionStack = function() {
-        this.marks = [0];
+        this.marks = [];
+    }
+
+    PositionStack.prototype.isEmpty = function() {
+        return this.marks.length === 0;
     }
 
     PositionStack.prototype.getPosition = function() {
+        if(this.marks.length === 0) {
+            return 0;
+        }
+
         return this.marks[this.marks.length - 1];
     }
     
@@ -58,6 +66,11 @@ $(function() {
     }
     
     PositionStack.prototype.popPosition = function() {
+        // Handle the empty list case
+        if(this.marks.length == 0) {
+            return 0;
+        }
+
         return this.marks.pop();
     }
 
@@ -159,14 +172,23 @@ $(function() {
     }
     
     Player.prototype.back = function() {
-        if(this.marks.getPosition() === 0.0) {};
+        if(this.marks.getPosition() <= 0.0) {
+            return;
+        };
 
         this.marks.popPosition();
         this.onBack();
     }
     
     Player.prototype.next = function() {
-        this.marks.pushPosition(this.marks.getPosition() + SEGMENT_LENGTH);
+        // If we're just starting out, start from 0
+        if(this.marks.isEmpty()) {
+            this.marks.pushPosition(0.0);
+        }
+        else {
+            this.marks.pushPosition(this.marks.getPosition() + SEGMENT_LENGTH);
+        }
+        
         this.onNext();
     }
 
