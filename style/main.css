@@ -1,0 +1,77 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #fffce9;
+    background:
+            radial-gradient(800px circle at center, rgba(255, 200, 100, 0.2), rgba(255, 200, 100, 0)),
+            url(blackorchid.png);
+
+    height: 100%;
+    margin: 0px;
+}
+
+div.sidebar {
+    position: fixed;
+    padding: 5px;
+    height: 100%;
+    margin-left: 0px;
+    width: 25%;
+
+    font-family: sans;
+    color: #fff;
+
+    box-shadow: 1px 0px 16px 4px #000;
+    
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+div.container {
+    background-color: #fffce9;
+    padding: 5px;
+    padding-right: 0px;
+    padding-left: 30px;
+    -moz-box-sizing: border-box;
+    
+    margin: 0px;
+    
+    height: 100%;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#transcriptEditor {
+    background-color: #fffce9;
+    height: 100%;
+    
+    line-height: 1.74em;
+    border-width: 0px;
+    width: 100%;
+    
+    outline: medium none;
+    white-space: pre-wrap;
+    overflow: auto;
+    word-wrap: break-word;
+    resize: none;
+    font-size: 1em;
+    font-family: serif;
+    max-width: 50em;
+}
+
+ul.hotkeys {
+    position: absolute;
+    bottom: 10px;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+ul.hotkeys li {
+    list-style-type: none;
+}
+
+#saveStatus {
+    opacity: 0.0;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style/main.css">
+    </head>
+    <body>
+        <div class="sidebar">
+            <input type="file" id="fileInput"></input>
+            <div id="player"></div>
+            
+            <ul class="hotkeys">
+                <li>Alt-L: Next</li>
+                <li>Alt-K: Replay</li>
+                <li>Alt-J: Back</li>
+                <li>Alt-S: Save</li>
+            </ul>
+            
+            <div id="saveStatus">Saved</div>
+        </div>
+    
+        <div class="container">
+            <textarea id="transcriptEditor" contentEditable autofocus>
+            </textarea>
+
+        </div>
+
+        <script type="text/javascript" src="js/lib/zepto.min.js"></script>
+        <script type="text/javascript" data-main="js/main.js" src="js/lib/require.js"></script>
+    </body>    
+</html>
