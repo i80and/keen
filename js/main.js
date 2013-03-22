@@ -253,10 +253,17 @@ $(function() {
     
     Editor.prototype.load = function(name) {
         this.name = name;
+        
         try {
             var ctx = JSON.parse(window.localStorage.getItem(name));
-            this.editorElement.value = ctx.text;
-            this.player.marks.importPositions(ctx.marks);
+            if(ctx !== null) {
+                this.editorElement.value = ctx.text;
+                this.player.marks.importPositions(ctx.marks);
+            }
+            else {
+                this.editorElement.value = '';
+                this.player.marks = new PositionStack();
+            }
         } catch(e) {
             console.log('Error loading ' + name);
         }
