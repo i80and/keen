@@ -9,7 +9,7 @@ import editorwidget = module('./editorwidget');
 
 $(function() {
     var player = new playerwidget.Player(document.getElementById('player'));
-    var editor = new editorwidget.Editor('transcriptEditor', '', player);
+    var editor = new editorwidget.Editor(<HTMLInputElement>document.getElementById('transcriptEditor'), '', player);
     
     document.addEventListener('keydown', function(event) {
         if(event.altKey && event.keyCode === 'L'.charCodeAt(0)) {

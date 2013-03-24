@@ -17,10 +17,10 @@ export class Editor {
     onDirty: () => void;
     onSave: () => void;
 
-    constructor(id: string, name: string, player: playerwidget.Player) {
+    constructor(element: HTMLInputElement, name: string, player: playerwidget.Player) {
         this.name = name;
         this.saveInterval = 5.0;
-        this.editorElement = $('#transcriptEditor')[0];    
+        this.editorElement = element;
         this.saveTimeoutId = 0;
         this.player = player;
         this.dirty = false;
