@@ -1,4 +1,4 @@
-/// <reference path="dom.d.ts" />
+/// <reference path="lib/dom.d.ts" />
 
 export class PositionStack {
     marks: number[];

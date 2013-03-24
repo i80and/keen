@@ -1,5 +1,5 @@
-/// <reference path="jquery.d.ts" />
-/// <reference path="dom.d.ts" />
+/// <reference path="lib/jquery.d.ts" />
+/// <reference path="lib/dom.d.ts" />
 
 import positionstack = module('./positionstack');
 

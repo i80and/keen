@@ -11,8 +11,8 @@ FILES=\
     js/playerwidget.ts \
     js/editorwidget.ts \
     js/positionstack.ts \
-    js/dom.d.ts \
-    js/jquery.d.ts
+    js/lib/dom.d.ts \
+    js/lib/jquery.d.ts
 
 $(OUTPUT): $(FILES)
 	$(TSC) --nolib js/main.ts
