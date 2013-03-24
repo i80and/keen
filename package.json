@@ -1,0 +1,10 @@
+{
+  "name": "keen",
+  "description": "Simple audio transcription studio",
+  "author": "Andrew Aldridge <i80and@foxquill.com>",
+  "devDependencies": {
+    "typescript": "",
+    "browserify": ">=2.0",
+    "uglify-js": ""
+  }
+}
