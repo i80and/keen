@@ -11,6 +11,8 @@ export class Editor {
     saveTimeoutId: number;
     player: playerwidget.Player;
     dirty: bool;
+
+    audioURL: any;
     
     onDirty: () => void;
     onSave: () => void;
@@ -22,6 +24,7 @@ export class Editor {
         this.saveTimeoutId = 0;
         this.player = player;
         this.dirty = false;
+        this.audioURL = null;
     
         this.load(this.name);
     
@@ -97,5 +100,26 @@ export class Editor {
         if(this.player.sourceElement.src) {
             this.player.sourceElement.currentTime = this.player.marks.getPosition();
         }
+    }
+    
+    registerInputElement(element: HTMLInputElement) {
+        var load = (file: any) => {
+            var file = element.files[0];
+            if(this.audioURL !== null) {
+                window.URL.revokeObjectURL(this.audioURL);
+            }
+            this.audioURL = window.URL.createObjectURL(file);
+            this.player.load(this.audioURL);
+            this.load(file.name);
+        }
+
+        var tryLoad = () => {
+            if(element.files.length > 0) {
+                load(element.files[0]);
+            }
+        };
+        
+        tryLoad();
+        element.onchange = tryLoad;
     }
 }

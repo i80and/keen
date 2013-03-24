@@ -44,15 +44,6 @@ $(function() {
             opacity: 0.0
         }, 'fast');
     };
-    
-    var objectURL = null;
-    $('#fileInput')[0].onchange = function(event) {
-        var file = this.files[0];
-        if(objectURL !== null) {
-            window.URL.revokeObjectURL(objectURL);
-        }
-        objectURL = window.URL.createObjectURL(file);
-        player.load(objectURL);
-        editor.load(file.name);
-    };
+
+    editor.registerInputElement($('#fileInput')[0]);
 });

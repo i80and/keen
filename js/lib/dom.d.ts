@@ -27,6 +27,9 @@ interface HTMLInputElement {
     addEventListener(name: string, any): void;
     value: string;
     appendChild(x: Element);
+    files: any[];
+
+    onchange: (f: any) => void;
 }
 
 interface URL {
