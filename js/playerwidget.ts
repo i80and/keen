@@ -18,7 +18,7 @@ function timeFormat(seconds: number) {
     return minutes.toString() + ':' + lfill('0', 2, seconds.toString());
 }
 
-var SEGMENT_LENGTH = 6;
+var SEGMENT_LENGTH = 5;
 export class Player {
     sourceElement: any;
     backElement: any;
