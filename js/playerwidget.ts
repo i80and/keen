@@ -55,23 +55,23 @@ export class Player {
         this.onBack = function() {};
 
         // Regularly update our time string (x:xx)
-        this.sourceElement.addEventListener('timeupdate', function() {
+        this.sourceElement.addEventListener('timeupdate', () => {
             this.timeElement.innerHTML = timeFormat(this.sourceElement.currentTime);
-        }.bind(this));
+        });
 
         this.backElement.addEventListener('click', () => {
             this.back();
             this.play();
-        }.bind(this));
+        });
 
         this.replayElement.addEventListener('click', () => {
             this.play();
-        }.bind(this));
+        });
 
         this.nextElement.addEventListener('click', () => {
             this.play();
             this.next();
-        }.bind(this));
+        });
         
         // Try to lower the playback speed, if supported
         this.speed = 1.0;
